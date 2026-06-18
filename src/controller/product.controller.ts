@@ -63,7 +63,29 @@ export const productController =async (req: IncomingMessage, res: ServerResponse
         // index Error handel
         if(index < 0) {
             res.writeHead(404, { "content-type": "application/json" });
-            res.end(JSON.stringify({ message: "Product not found", data: null }));
+            res.end(JSON.stringify({ message: "Product not found!", data: null }));
+        }
+    }
+
+    // Single products "DELETE"
+    else if(method === "DELETE" && id !== null){
+        const products = readProducts()
+
+        // find product 
+        const index = products.findIndex((p: IProducts)=>p.id === id)
+
+        // DELETE product from array
+        products.splice(index, 1);
+
+        // Delete product Array in database
+        insertProduct(products);
+        res.writeHead(200, { "content-type": "application/json" });
+        res.end(JSON.stringify({ message: "Product deleted successfully", data: null }));
+
+        // index Error handel
+        if(index < 0) {
+            res.writeHead(404, { "content-type": "application/json" });
+            res.end(JSON.stringify({ message: "Product not found!", data: null }));
         }
     }
 }
