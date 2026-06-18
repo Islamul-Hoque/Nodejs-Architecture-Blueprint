@@ -28,21 +28,21 @@ export const productController =async (req: IncomingMessage, res: ServerResponse
     }
 
     // Single product "POST"
-    // else if(method === "POST" && url === "/products" ){
-    //     const products = readProducts()
+    else if(method === "POST" && url === "/products" ){
+        const products = readProducts()
 
-    //     const body = await parseBody(req)
-    //     const newProduct = {
-    //         id: Date.now(),
-    //         ...body
-    //     }
-    //     products.push(newProduct)
-    //     insertProduct(products);
-    //     // console.log(products);
+        const body = await parseBody(req)
+        const newProduct = {
+            id: Date.now(),
+            ...body
+        }
+        products.push(newProduct)
+        insertProduct(products);
+        // console.log(products);
 
-    //     res.writeHead(200, { "content-type": "application/json" });
-    //     res.end(JSON.stringify({ message: "Single product created successfully", data: newProduct }));
-    // }
+        res.writeHead(200, { "content-type": "application/json" });
+        res.end(JSON.stringify({ message: "Single product created successfully", data: newProduct }));
+    }
 
     // // Single products "PUT"
     // else if(method === "PUT" && id !== null){
